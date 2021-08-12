@@ -2,9 +2,19 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from fbprophet import Prophet
+import requests
+import time
+import datetime
+
+stock = 'IBM'
+period1 = int(time.mktime(datetime.datetime(2020, 8, 12, 23, 59).timetuple()))
+period2 = int(time.mktime(datetime.datetime(2021, 8, 12, 23, 59).timetuple()))
+interval = '1d' # 1d, 1m
+
+csv_url = f'https://query1.finance.yahoo.com/v7/finance/download/{stock}?period1={period1}&period2={period2}&interval={interval}&events=history&includeAdjustedClose=true'
 
 # load dataset from Yahoo Finance
-data = pd.read_csv("IBM.csv")
+data = pd.read_csv(csv_url)
 print(data.head())
 
 # Printing out graph of IBM close prices by date
