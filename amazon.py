@@ -6,9 +6,10 @@ import requests
 import time
 import datetime
 
+today = datetime.datetime.today()
 stock = 'AMZN'
-period1 = int(time.mktime(datetime.datetime(2020, 8, 12, 23, 59).timetuple()))
-period2 = int(time.mktime(datetime.datetime(2021, 8, 12, 23, 59).timetuple()))
+period1 = int(time.mktime(datetime.datetime(today.year - 1, today.month, today.day, 23, 59).timetuple()))
+period2 = int(time.mktime(datetime.datetime(today.year, today.month, today.day, 23, 59).timetuple()))
 interval = '1d' # 1d, 1m
 
 csv_url = f'https://query1.finance.yahoo.com/v7/finance/download/{stock}?period1={period1}&period2={period2}&interval={interval}&events=history&includeAdjustedClose=true'

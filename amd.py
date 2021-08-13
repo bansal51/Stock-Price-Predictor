@@ -7,7 +7,7 @@ import time
 import datetime
 
 today = datetime.datetime.today()
-stock = 'IBM'
+stock = 'AMD'
 period1 = int(time.mktime(datetime.datetime(today.year - 1, today.month, today.day, 23, 59).timetuple()))
 period2 = int(time.mktime(datetime.datetime(today.year, today.month, today.day, 23, 59).timetuple()))
 interval = '1d' # 1d, 1m
@@ -18,9 +18,9 @@ csv_url = f'https://query1.finance.yahoo.com/v7/finance/download/{stock}?period1
 data = pd.read_csv(csv_url)
 print(data.head())
 
-# Printing out graph of IBM close prices by date
+# Printing out graph of AMD close prices by date
 close = data['Close']
-ax = close.plot(title = 'IBM')
+ax = close.plot(title = 'AMD')
 ax.set_xlabel('Date')
 ax.set_ylabel('Close')
 plt.show()
@@ -32,7 +32,7 @@ data = data[["Date", "Close"]]
 # We are using the Facebook Prophet model --> need to rename columns
 data = data.rename(columns={"Date" : "ds", "Close" : "y"})
 
-# Predict Stock Trend of IBM using Facebook Prophet
+# Predict Stock Trend of AMD using Facebook Prophet
 model = Prophet()
 model.fit(data)
 
